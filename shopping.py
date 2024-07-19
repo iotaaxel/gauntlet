@@ -1,3 +1,5 @@
+import unittest
+
 def shopping(products, shopping_list):
     # Create a dictionary to map products to departments
     product_to_department = {}
@@ -22,23 +24,41 @@ def shopping(products, shopping_list):
     
     return time_saved
 
-# Test cases
-products = [
-    ["Cheese", "Dairy"], ["Carrots", "Produce"], ["Potatoes", "Produce"],
-    ["Canned Tuna", "Pantry"], ["Romaine Lettuce", "Produce"], ["Chocolate Milk", "Dairy"],
-    ["Flour", "Pantry"], ["Iceberg Lettuce", "Produce"], ["Coffee", "Pantry"],
-    ["Pasta", "Pantry"], ["Milk", "Dairy"], ["Blueberries", "Produce"],
-    ["Pasta Sauce", "Pantry"]
-]
+class TestShopping(unittest.TestCase):
+    
+    def setUp(self):
+        self.products = [
+            ["Cheese", "Dairy"], ["Carrots", "Produce"], ["Potatoes", "Produce"],
+            ["Canned Tuna", "Pantry"], ["Romaine Lettuce", "Produce"], ["Chocolate Milk", "Dairy"],
+            ["Flour", "Pantry"], ["Iceberg Lettuce", "Produce"], ["Coffee", "Pantry"],
+            ["Pasta", "Pantry"], ["Milk", "Dairy"], ["Blueberries", "Produce"],
+            ["Pasta Sauce", "Pantry"]
+        ]
+    
+    def test_list1(self):
+        shopping_list = ["Blueberries", "Milk", "Coffee", "Flour", "Cheese", "Carrots"]
+        result = shopping(self.products, shopping_list)
+        self.assertEqual(result, 2)
+    
+    def test_list2(self):
+        shopping_list = ["Blueberries", "Carrots", "Coffee", "Milk", "Flour", "Cheese"]
+        result = shopping(self.products, shopping_list)
+        self.assertEqual(result, 2)
+    
+    def test_list3(self):
+        shopping_list = ["Blueberries", "Carrots", "Romaine Lettuce", "Iceberg Lettuce"]
+        result = shopping(self.products, shopping_list)
+        self.assertEqual(result, 0)
+    
+    def test_list4(self):
+        shopping_list = ["Milk", "Flour", "Chocolate Milk", "Pasta Sauce"]
+        result = shopping(self.products, shopping_list)
+        self.assertEqual(result, 2)
+    
+    def test_list5(self):
+        shopping_list = ["Cheese", "Potatoes", "Blueberries", "Canned Tuna"]
+        result = shopping(self.products, shopping_list)
+        self.assertEqual(result, 0)
 
-list1 = ["Blueberries", "Milk", "Coffee", "Flour", "Cheese", "Carrots"]
-list2 = ["Blueberries", "Carrots", "Coffee", "Milk", "Flour", "Cheese"]
-list3 = ["Blueberries", "Carrots", "Romaine Lettuce", "Iceberg Lettuce"]
-list4 = ["Milk", "Flour", "Chocolate Milk", "Pasta Sauce"]
-list5 = ["Cheese", "Potatoes", "Blueberries", "Canned Tuna"]
-
-print(shopping(products, list1))  # => 2
-print(shopping(products, list2))  # => 2
-print(shopping(products, list3))  # => 0
-print(shopping(products, list4))  # => 2
-print(shopping(products, list5))  # => 0
+if __name__ == '__main__':
+    unittest.main()
