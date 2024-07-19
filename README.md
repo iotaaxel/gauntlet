@@ -48,3 +48,29 @@ shopping(products, list5) => 0
 ```
 Complexity Variable:
 `n`: number of products
+
+## Performance Analysis of Shopping Optimization Algorithm
+### Time Complexity
+1. Mapping Products to Departments:
+   * The loop that creates the product_to_department dictionary iterates over the products list.
+   * This takes `O(n)` time, where `n` is the number of products.
+3. Calculating Original Visits:
+   * The loop that calculates the number of department visits in the original order iterates over the shopping_list.
+   * This takes `O(m)` time, where `m` is the number of items in the shopping list.
+5. Calculating Optimized Visits:
+   * The set comprehension that collects unique departments from the shopping list also iterates over the shopping_list.
+   * This takes `O(m)` time.
+    
+### Space Complexity 
+1. Product to Department Mapping:
+   * The product_to_department dictionary stores `n` key-value pairs.
+   * This takes `O(n)` space.
+3. Departments Set:
+   * The set that collects unique departments from the shopping list can store up to `m` unique departments.
+   * In the worst case, each item in the shopping list belongs to a different department, so the set requires `O(m)` space.
+5. Additional Variables:
+   * Other variables such as original_visits, last_department, and time_saved use a constant amount of space, i.e., `O(1)`.
+
+### Summary
+* Time Complexity: `O(n+m)`, where `n` is the number of products and `m` is the number of items in the shopping list.
+Space Complexity: `O(n+m)`, for storing the product-to-department mapping and the set of unique departments.
